@@ -1,0 +1,40 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.TextPage>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Layout.cshtml";
+}
+
+<!-- Default header for text pages -->
+<section class="section section--themed section--header section--content-center-bottom">
+    <div class="section__hero-content">
+        <!-- Replace with "PageName" value -->
+        <h1 class="no-air">@Umbraco.Field("pageName")</h1>
+    </div>
+</section>
+<!-- End of header section-->
+
+<section class="section">
+    <div class="container">
+
+        <!-- Beginning of Textpage content section -->
+        <div class="col-md-9">
+            <article>
+                <!-- Replace with "bodyText" value -->
+                <p>@Umbraco.Field("bodyText")</p>
+            </article>
+        </div>
+        <!-- End of Textpage content section -->
+
+        <!-- Beginning of secondary navigation -->
+        <div class="col-md-3">
+            <nav class="nav-bar nav-bar--list">
+                @foreach (var child in Model.Content.AncestorOrSelf(2).Children() )
+                {
+                    <a class="nav-link nav-link--black @child.IsAncestorOrSelf(Model.Content, "nav-link--active")" href="@child.Url">@child.Name</a>
+                }
+            </nav>
+        </div>
+        <!-- End of secondary navigation -->
+
+    </div>
+</section>
